@@ -54,6 +54,7 @@ class PostController extends Controller
         $redact = new Post();
         $form = $this->createForm(PostType::class, $redact);
         $form->handleRequest($request);
+
         return $this->render('post/redact.html.twig', ['form' => $form->createView()]);
     }
 }

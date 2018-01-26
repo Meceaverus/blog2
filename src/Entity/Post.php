@@ -110,6 +110,4 @@ class Post
         $this->text = $text;
         return $this;
     }
-
-
 }
