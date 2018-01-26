@@ -23,14 +23,21 @@ class Post
     private $data;
     /**
      * @var string
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", options={"default": ""})
      */
     private $title;
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(type="text")
      */
     private $text;
+
+    public function __construct()
+    {
+        $this->data = new \DateTime();
+        $this->title = '';
+        $this->text = '';
+    }
 
     /**
      * @return mixed
@@ -87,21 +94,22 @@ class Post
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getText(): string
+    public function getText(): ?string
     {
         return $this->text;
     }
 
     /**
-     * @param string $text
+     * @param null|string $text
      * @return Post
      */
-    public function setText(string $text): Post
+    public function setText(?string $text): Post
     {
         $this->text = $text;
         return $this;
     }
+
 
 }

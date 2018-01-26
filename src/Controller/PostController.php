@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class PostController extends Controller
 {
@@ -17,7 +18,8 @@ class PostController extends Controller
     public function showAll()
     {
         $repo = $this->getDoctrine()->getRepository(Post::class);
-        $posts = $repo->findAll([], ['data'=> 'DESC'], 3);
+        $posts = $repo->findBy([], ['data'=> 'DESC'], 3);
+
         return $this->render('default/index.html.twig', ['posts' => $posts]);
     }
     /**
@@ -39,7 +41,7 @@ class PostController extends Controller
             $em->persist($post);
             $em->flush();
             $id = $post->getId();
-            $this->addFlash('info', 'Пост добавлен!');
+            $this->addFlash('info', 'Добавлено');
             return $this->redirectToRoute('postOne', ['id'=>$id]);
         }
         return $this->render('post/add.html.twig', ['form' => $form->createView()]);

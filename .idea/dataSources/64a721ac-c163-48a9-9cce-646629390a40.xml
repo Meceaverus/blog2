@@ -1006,8 +1006,9 @@
     </column>
     <column id="252" parent="247" name="title">
       <Position>3</Position>
-      <DataType>longtext|0</DataType>
+      <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="253" parent="247" name="text">
