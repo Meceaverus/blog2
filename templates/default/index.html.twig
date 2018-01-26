@@ -3,14 +3,16 @@
 {% block body %}
     <h2>Публикации</h2>
 
-    <a href="{{ path('add_post') }}">Добавить статью</a> <br>
+    <div>
+        <a href="{{ path('add_post') }}">Добавить статью</a> <br>
 
 
-    {% for post in posts %}
-        {{ post.data|date("m/d/Y") }} <br>
-        {{ post.title }} <br>
-        {{ post.text }} <br><br>
-        <a href="{{ path('postOne', {'id': post.id} ) }}">Читать далее </a> <br>
-        <hr>
+        {% for post in posts %}
+            {{ post.data|date("m/d/Y") }} <br>
+            {{ post.title }} <br>
+            {{ post.text }} <br><br>
+            <a href="{{ path('postOne', {'id': post.id} ) }}">Читать далее </a> <br>
+            <hr>
+    </div>
     {% endfor %}
 {% endblock body %}
