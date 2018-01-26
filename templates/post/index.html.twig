@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Читать дальше</h2>
+    {{ post.data|date("m/d/Y") }} <br>
+    {{ post.title }} <br>
+    {{ post.text }} <br><br>
+
+    <a href="{{ path('redact', {'id': post.id }) }}">Редактировать</a> <br>
+
+    <a href="{{ path('homepage') }}">Главная</a> <br>
+
+{% endblock body %}

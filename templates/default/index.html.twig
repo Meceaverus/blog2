@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Блог</h2>
+    <h2>Публикации</h2>
 
-    {% for data in post %}
-        {{ post.data }} <br>
+    <a href="{{ path('add_post') }}">Добавить пост</a> <br>
+
+
+    {% for post in posts %}
+        {{ post.data|date("m/d/Y") }} <br>
         {{ post.title }} <br>
         {{ post.text }} <br><br>
-        <a href="{{ path('postOne', {'id': post.id} ) }}">{{ post.title }} </a> <br>
+        <a href="{{ path('postOne', {'id': post.id} ) }}">Читать далее </a> <br>
         <hr>
     {% endfor %}
 {% endblock body %}
