@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Блог</h2>
+
+    {% for data in post %}
+        {{ post.data }} <br>
+        {{ post.title }} <br>
+        {{ post.text }} <br><br>
+        <a href="{{ path('postOne', {'id': post.id} ) }}">{{ post.title }} </a> <br>
+        <hr>
+    {% endfor %}
+{% endblock body %}
