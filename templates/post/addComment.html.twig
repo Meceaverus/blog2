@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Добавить комментарий</h1>
+    <div class="container-fluid">
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-default">Добавить</button>
+        {{ form_end(form) }}
+        <button type="submit" class="btn btn-default" {{ url('homepage') }}">Главная</button>
+        <a href="{{ path('homepage') }}">Вернуться на главную</a> <br>
+    </div>
+{% endblock %}

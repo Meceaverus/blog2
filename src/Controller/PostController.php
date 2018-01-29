@@ -3,12 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\Comment;
 use App\Form\PostType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class PostController extends Controller
 {
@@ -57,4 +57,17 @@ class PostController extends Controller
 
         return $this->render('post/redact.html.twig', ['form' => $form->createView()]);
     }
+
+    /**
+     * @Route("/addComment", name="add_comment")
+     */
+    public function comment(Comment $comment, Request $request)
+    {
+        $comment = new Post();
+        $form = $this->createForm(PostType::class, $comment);
+        $form->handleRequest($request);
+
+        return $this->render('post/addComment.html.twig', ['form' => $form->createView()]);
+    }
+
 }

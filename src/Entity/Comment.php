@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  */
-class Post
+class Comment
 {
     /**
      * @ORM\Id
@@ -24,9 +25,10 @@ class Post
 
     /**
      * @var string
-     * @ORM\Column(type="string", options={"default": ""})
+     *
+     * @ORM\Column(type="string", length=250)
      */
-    private $title;
+    private $name;
 
     /**
      * @var string|null
@@ -35,15 +37,16 @@ class Post
     private $text;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="comment" )
-     * @ORM\JoinColumn(name="comment_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post")
+     * @ORM\OrderBy({"name" = "ASC"})
      */
-    private $post;
+    private $comment;
 
     public function __construct()
     {
+        $this->comment = new ArrayCollection();
         $this->data = new \DateTime();
-        $this->title = '';
+        $this->name = '';
         $this->text = '';
     }
 
@@ -57,7 +60,7 @@ class Post
 
     /**
      * @param mixed $id
-     * @return Post
+     * @return Comment
      */
     public function setId($id)
     {
@@ -75,9 +78,9 @@ class Post
 
     /**
      * @param \DateTime $data
-     * @return Post
+     * @return Comment
      */
-    public function setData(\DateTime $data): Post
+    public function setData(\DateTime $data): Comment
     {
         $this->data = $data;
         return $this;
@@ -86,18 +89,18 @@ class Post
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getName(): string
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**
-     * @param string $title
-     * @return Post
+     * @param string $name
+     * @return Comment
      */
-    public function setTitle(string $title): Post
+    public function setName(string $name): Comment
     {
-        $this->title = $title;
+        $this->name = $name;
         return $this;
     }
 
@@ -111,11 +114,12 @@ class Post
 
     /**
      * @param null|string $text
-     * @return Post
+     * @return Comment
      */
-    public function setText(?string $text): Post
+    public function setText(?string $text): Comment
     {
         $this->text = $text;
         return $this;
     }
+
 }
