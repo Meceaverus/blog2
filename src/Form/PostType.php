@@ -14,6 +14,7 @@ class PostType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => Post::class,
+            'data_class' => Comment::class,
         ));
     }
 
@@ -23,6 +24,7 @@ class PostType extends AbstractType
             ->add('text')
         ;
     }
+
 
     public function addForm(FormBuilderInterface $builder, array $options)
     {
