@@ -31,24 +31,17 @@ class Comment
     private $name;
 
     /**
-     * @var string|null
+     * @var string
      * @ORM\Column(type="text")
      */
     private $text;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post")
-     * @ORM\OrderBy({"name" = "ASC"})
+     * @var Post
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="comment")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
-    private $comment;
-
-    public function __construct()
-    {
-        $this->comment = new ArrayCollection();
-        $this->data = new \DateTime();
-        $this->name = '';
-        $this->text = '';
-    }
+    private $post;
 
     /**
      * @return mixed
@@ -105,39 +98,45 @@ class Comment
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getText(): ?string
+    public function getText(): string
     {
         return $this->text;
     }
 
     /**
-     * @param null|string $text
+     * @param string $text
      * @return Comment
      */
-    public function setText(?string $text): Comment
+    public function setText(string $text): Comment
     {
         $this->text = $text;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return Post
      */
-    public function getComment()
+    public function getPost(): Post
     {
-        return $this->comment;
+        return $this->post;
     }
 
     /**
-     * @param mixed $comment
+     * @param Post $post
      * @return Comment
      */
-    public function setComment($comment)
+    public function setPost(Post $post): Comment
     {
-        $this->comment = $comment;
+        $this->post = $post;
         return $this;
     }
 
+    public function __construct()
+    {
+        $this->data = new \DateTime();
+        $this->name = '';
+        $this->text = '';
+    }
 }

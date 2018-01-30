@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,37 +17,27 @@ class Post
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
      */
     private $data;
-
     /**
      * @var string
-     * @ORM\Column(type="string", options={"default": ""})
+     * @ORM\Column(type="text")
      */
     private $title;
-
     /**
-     * @var string|null
+     * @var string
      * @ORM\Column(type="text")
      */
     private $text;
-
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="comment" )
-     * @ORM\JoinColumn(name="comment_id")
+     * @var Comment[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
+     * @ORM\OrderBy({"dataComm" = "DESC"})
      */
-    private $post;
-
-    public function __construct()
-    {
-        $this->data = new \DateTime();
-        $this->title = '';
-        $this->text = '';
-    }
+    private $comment;
 
     /**
      * @return mixed
@@ -102,20 +94,52 @@ class Post
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getText(): ?string
+    public function getText(): string
     {
         return $this->text;
     }
 
     /**
-     * @param null|string $text
+     * @param string $text
      * @return Post
      */
-    public function setText(?string $text): Post
+    public function setText(string $text): Post
     {
         $this->text = $text;
         return $this;
     }
+
+    public function __construct()
+    {
+        $this->data = new \DateTime();
+        $this->title = '';
+        $this->text = '';
+        $this->comment = new ArrayCollection();
+    }
+
+    public function detShortText(): ?string
+    {
+        $paragraphs = explode("\n", $this->text, 2);
+        return reset($paragraphs);
+    }
+    /**
+     * @return Comment[]|ArrayCollection
+     */
+    public function getComment(): ? Collection
+    {
+        return $this->comment;
+    }
+    /**
+     * @param Comment[]|ArrayCollection $comment
+     * @return Post
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+        return $this;
+    }
+
+
 }

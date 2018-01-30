@@ -1009,49 +1009,62 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="253" parent="246" name="PRIMARY">
+    <column id="253" parent="246" name="post_id">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="254" parent="246" name="IDX_9474526C4B89032C">
+      <ColNames>post_id</ColNames>
+    </index>
+    <key id="255" parent="246" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="254" parent="247" name="version">
+    <foreign-key id="256" parent="246" name="FK_9474526C4B89032C">
+      <ColNames>post_id</ColNames>
+      <RefSchemaName>blog2</RefSchemaName>
+      <RefTableName>post</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="257" parent="247" name="version">
       <Position>1</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="255" parent="247" name="PRIMARY">
+    <key id="258" parent="247" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>version</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="256" parent="248" name="id">
+    <column id="259" parent="248" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="257" parent="248" name="data">
+    <column id="260" parent="248" name="data">
       <Position>2</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="258" parent="248" name="title">
+    <column id="261" parent="248" name="title">
       <Position>3</Position>
-      <DataType>varchar(255)|0</DataType>
+      <DataType>longtext|0</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="259" parent="248" name="text">
+    <column id="262" parent="248" name="text">
       <Position>4</Position>
       <DataType>longtext|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="260" parent="248" name="PRIMARY">
+    <key id="263" parent="248" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
